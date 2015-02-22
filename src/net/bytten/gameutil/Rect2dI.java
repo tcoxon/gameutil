@@ -41,6 +41,10 @@ public class Rect2dI {
         return x >= this.x && x < this.x+w && y >= this.y && y < this.y+h;
     }
     
+    public boolean contains(Coords pos) {
+        return contains(pos.x, pos.y);
+    }
+    
     public Coords getOffset() {
         return new Coords(x,y);
     }

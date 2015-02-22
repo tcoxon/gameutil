@@ -49,6 +49,19 @@ public class AStar<Id extends Comparable<Id>> {
         this.to = to;
     }
     
+    public AStar(Id from, Id to) {
+        this.from = from;
+        this.to = to;
+    }
+    
+    public void setClient(IClient<Id> client) {
+        this.client = client;
+    }
+    
+    public Id getCameFrom(Id id) {
+        return cameFrom.get(id);
+    }
+    
     protected double heuristicDistance(Coords pos) {
         // Manhattan distance heuristic
         Coords toPos = client.getCoords(to);
