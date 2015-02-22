@@ -20,8 +20,12 @@ public class Coords implements Comparable<Coords> {
      * 
      * @param d the direction
      */
-    public Coords nextInDirection(Direction d) {
+    public Coords add(Direction d) {
         return add(d.x,d.y);
+    }
+    
+    public Coords add(Coords xy) {
+        return new Coords(x + xy.x, y + xy.y);
     }
     
     public Coords add(int dx, int dy) {
