@@ -119,6 +119,14 @@ public class FileUtil {
         }
     }
     
+    public static String readText(URL url) throws IOException {
+        try {
+            return readText(new File(url.toURI()));
+        } catch (URISyntaxException e) {
+            throw new IOException(e);
+        }
+    }
+
     public static String[] readLines(File f) throws IOException {
         FileInputStream in = new FileInputStream(f);
         try {
