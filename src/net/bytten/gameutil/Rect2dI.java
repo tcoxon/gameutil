@@ -13,6 +13,23 @@ public class Rect2dI {
         this.h = h;
     }
     
+    public static Rect2dI fromExtremes(int x, int y, int right, int bottom) {
+        return new Rect2dI(x, y, right-x, bottom-y);
+    }
+    
+    public int left() {
+        return x;
+    }
+    public int top() {
+        return y;
+    }
+    public int width() {
+        return w;
+    }
+    public int height() {
+        return h;
+    }
+    // Bottom and right form an exclusive range.
     public int bottom() {
         return y+h;
     }
@@ -31,7 +48,6 @@ public class Rect2dI {
     public Coords getSize() {
         return new Coords(w,h);
     }
-    
     
     public static Rect2dI boundingBox(Set<Coords> xyset) {
         if (xyset.size() == 0) return new Rect2dI(0,0,0,0);

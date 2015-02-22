@@ -1,11 +1,5 @@
 package net.bytten.gameutil;
 
-/**
- * An AWT-agnostic 2D coordinate class.
- * <p>
- * Provided so that metazelda may be used on platforms without AWT (e.g.
- * Android).
- */
 public class Coords implements Comparable<Coords> {
 
     public final int x, y;
