@@ -41,17 +41,28 @@ public class AStar<Id extends Comparable<Id>> {
     protected Set<Id> closedSet = new TreeSet<Id>();
     protected Queue<Id> openSet = new PriorityQueue<Id>(110, DISTCMP);
     protected IClient<Id> client;
-    protected Id from, to;
+    protected Id to;
+    protected Set<Id> fromSet;
+    
+    public AStar(IClient<Id> client, Set<Id> fromSet, Id to) {
+        this.client = client;
+        this.to = to;
+        this.fromSet = new TreeSet<Id>(fromSet);
+    }
+    
+    public AStar(Set<Id> from, Id to) {
+        this(null, from, to);
+    }
     
     public AStar(IClient<Id> client, Id from, Id to) {
         this.client = client;
-        this.from = from;
         this.to = to;
+        this.fromSet = new TreeSet<Id>();
+        this.fromSet.add(from);
     }
     
     public AStar(Id from, Id to) {
-        this.from = from;
-        this.to = to;
+        this(null, from, to);
     }
     
     public void setClient(IClient<Id> client) {
@@ -80,10 +91,12 @@ public class AStar<Id extends Comparable<Id>> {
         /* See this page for the algorithm:
          * http://en.wikipedia.org/wiki/A*_search_algorithm
          */
-        openSet.add(from);
-        gScore.put(from, 0.0);
-        updateFScore(from);
         
+        for (Id from: fromSet) {
+            openSet.add(from);
+            gScore.put(from, 0.0);
+            updateFScore(from);
+        }
         while (!openSet.isEmpty()) {
             Id current = openSet.remove();
             
@@ -121,7 +134,7 @@ public class AStar<Id extends Comparable<Id>> {
     protected List<Id> reconstructPath() {
         List<Id> result = new ArrayList<Id>();
         Id current = to;
-        while (!current.equals(from)) {
+        while (!fromSet.contains(current)) {
             result.add(current);
             current = cameFrom.get(current);
         }

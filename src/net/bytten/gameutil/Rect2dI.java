@@ -17,6 +17,14 @@ public class Rect2dI {
         return new Rect2dI(x, y, right-x, bottom-y);
     }
     
+    public static Rect2dI fromExtremes(Coords min, Coords max) {
+        return fromExtremes(min.x, min.y, max.x, max.y);
+    }
+    
+    public static Rect2dI fromExtremesInclusive(Coords min, Coords max) {
+        return fromExtremes(min, max.add(1,1));
+    }
+    
     public int left() {
         return x;
     }
@@ -35,6 +43,15 @@ public class Rect2dI {
     }
     public int right() {
         return x+w;
+    }
+    
+    public Coords topLeft() {
+        return getOffset();
+    }
+    
+    // Note that this is *exclusive*
+    public Coords bottomRight() {
+        return getOffset().add(getSize());
     }
     
     public boolean contains(int x, int y) {
