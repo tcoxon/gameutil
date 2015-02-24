@@ -3,26 +3,26 @@ package net.bytten.gameutil;
 import java.io.Serializable;
 import java.util.*;
 
-public class Rect2dI implements Serializable {
+public class Rect2I implements Serializable {
     
     public final int x, y, w, h;
 
-    public Rect2dI(int x, int y, int w, int h) {
+    public Rect2I(int x, int y, int w, int h) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
     }
     
-    public static Rect2dI fromExtremes(int x, int y, int right, int bottom) {
-        return new Rect2dI(x, y, right-x, bottom-y);
+    public static Rect2I fromExtremes(int x, int y, int right, int bottom) {
+        return new Rect2I(x, y, right-x, bottom-y);
     }
     
-    public static Rect2dI fromExtremes(Vec2I min, Vec2I max) {
+    public static Rect2I fromExtremes(Vec2I min, Vec2I max) {
         return fromExtremes(min.x, min.y, max.x, max.y);
     }
     
-    public static Rect2dI fromExtremesInclusive(Vec2I min, Vec2I max) {
+    public static Rect2I fromExtremesInclusive(Vec2I min, Vec2I max) {
         return fromExtremes(min, max.add(1,1));
     }
     
@@ -71,8 +71,8 @@ public class Rect2dI implements Serializable {
         return new Vec2I(w,h);
     }
     
-    public static Rect2dI boundingBox(Set<Vec2I> xyset) {
-        if (xyset.size() == 0) return new Rect2dI(0,0,0,0);
+    public static Rect2I boundingBox(Set<Vec2I> xyset) {
+        if (xyset.size() == 0) return new Rect2I(0,0,0,0);
         int minx = Integer.MAX_VALUE, miny = Integer.MAX_VALUE,
             maxx = Integer.MIN_VALUE, maxy = Integer.MIN_VALUE;
         for (net.bytten.gameutil.Vec2I xy: xyset) {
@@ -82,7 +82,7 @@ public class Rect2dI implements Serializable {
             if (xy.y > maxy) maxy = xy.y;
         }
         assert minx <= maxx && miny <= maxy;
-        return new Rect2dI(minx, miny, maxx-minx+1, maxy-miny+1);
+        return new Rect2I(minx, miny, maxx-minx+1, maxy-miny+1);
     }
 
 }

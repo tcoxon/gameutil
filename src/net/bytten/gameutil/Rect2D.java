@@ -2,11 +2,11 @@ package net.bytten.gameutil;
 
 import java.io.Serializable;
 
-public class Rect2d implements Serializable {
+public class Rect2D implements Serializable {
     
     public final double x, y, w, h;
     
-    public Rect2d(double x, double y, double w, double h) {
+    public Rect2D(double x, double y, double w, double h) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -53,7 +53,7 @@ public class Rect2d implements Serializable {
         return new Vec2D(w/2, h/2);
     }
     
-    public boolean overlaps(Rect2d other) {
+    public boolean overlaps(Rect2D other) {
         Vec2D mid = midPoint(),
             omid = other.midPoint();
         Vec2D half = halfSize(),
@@ -64,8 +64,8 @@ public class Rect2d implements Serializable {
     
     @Override
     public boolean equals(Object other) {
-        if (other instanceof Rect2d) {
-            Rect2d or = (Rect2d)other;
+        if (other instanceof Rect2D) {
+            Rect2D or = (Rect2D)other;
             return x == or.x && y == or.y && w == or.w && h == or.h;
         }
         return super.equals(other);
@@ -77,16 +77,16 @@ public class Rect2d implements Serializable {
             Double.toString(w)+", "+Double.toString(h)+")";
     }
 
-    public Rect2d scale(double m) {
-        return new Rect2d(x*m, y*m, w*m, h*m);
+    public Rect2D scale(double m) {
+        return new Rect2D(x*m, y*m, w*m, h*m);
     }
     
-    public Rect2d translate(Vec2D other) {
+    public Rect2D translate(Vec2D other) {
         return translate(other.x, other.y);
     }
     
-    public Rect2d translate(double dx, double dy) {
-        return new Rect2d(x + dx, y + dy, w, h);
+    public Rect2D translate(double dx, double dy) {
+        return new Rect2D(x + dx, y + dy, w, h);
     }
     
     public boolean contains(Vec2D pos) {

@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import net.bytten.gameutil.Vec2I;
-import net.bytten.gameutil.Rect2dI;
+import net.bytten.gameutil.Rect2I;
 
 public class MaximalRectangle {
     
@@ -16,7 +16,7 @@ public class MaximalRectangle {
     final int[] cache;
     final int M, N;
 
-    public MaximalRectangle(Set<Vec2I> ones, Rect2dI boundingBox) {
+    public MaximalRectangle(Set<Vec2I> ones, Rect2I boundingBox) {
         offs = boundingBox.topLeft();
         N = boundingBox.width();
         M = boundingBox.height();
@@ -36,7 +36,7 @@ public class MaximalRectangle {
         }
     }
     
-    public Rect2dI solve() {
+    public Rect2I solve() {
         Vec2I bestLL = null, bestUR = null;
         int bestArea = -1;
         
@@ -71,7 +71,7 @@ public class MaximalRectangle {
             }
         }
         assert bestLL != null && bestUR != null && bestArea >= 0;
-        return Rect2dI.fromExtremesInclusive(bestLL.add(offs), bestUR.add(offs));
+        return Rect2I.fromExtremesInclusive(bestLL.add(offs), bestUR.add(offs));
     }
 
 }
