@@ -3,7 +3,7 @@ package net.bytten.gameutil;
 import java.io.*;
 import java.util.*;
 
-public class Matrix<T> implements Serializable, Iterable<T>, Collection<T> {
+public class Array2D<T> implements Serializable, Iterable<T>, Collection<T> {
 
     private static final long serialVersionUID = 1L;
     
@@ -11,7 +11,7 @@ public class Matrix<T> implements Serializable, Iterable<T>, Collection<T> {
     private int cols;
     private int rows;
     
-    public Matrix(int cols, int rows) {
+    public Array2D(int cols, int rows) {
         this.cols = cols;
         this.rows = rows;
         init();

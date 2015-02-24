@@ -1,6 +1,6 @@
 package net.bytten.gameutil.algorithms;
 
-import net.bytten.gameutil.DoubleMatrix;
+import net.bytten.gameutil.MatrixD;
 
 //JAVA REFERENCE IMPLEMENTATION OF IMPROVED NOISE - COPYRIGHT 2002 KEN PERLIN.
 
@@ -51,8 +51,8 @@ public strictfp final class Perlin {
     };
     static { for (int i=0; i < 256 ; i++) p[256+i] = p[i] = permutation[i]; }
     
-    public static DoubleMatrix createOctave(int w, int h, double z, double scale, int pixelocity) {
-        DoubleMatrix result = new DoubleMatrix(w, h);
+    public static MatrixD createOctave(int w, int h, double z, double scale, int pixelocity) {
+        MatrixD result = new MatrixD(w, h);
         for (int x = 0; x < w; ++x)
             for (int y = 0; y < h; ++y) {
                 result.set(x,y, noise((x/pixelocity*pixelocity)*scale,

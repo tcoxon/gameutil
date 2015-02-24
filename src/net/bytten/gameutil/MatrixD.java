@@ -1,16 +1,16 @@
 package net.bytten.gameutil;
 
-public strictfp class DoubleMatrix extends Matrix<Double> {
+public strictfp class MatrixD extends Array2D<Double> {
 	private static final long serialVersionUID = 1L;
 
-	public DoubleMatrix(int cols, int rows) {
+	public MatrixD(int cols, int rows) {
         super(cols, rows);
         for (int x = 0; x < cols; x++)
             for (int y = 0; y < rows; ++y)
                 set(x,y, 0.0);
     }
     
-    public void add(DoubleMatrix other) {
+    public void add(MatrixD other) {
         assert getCols() == other.getCols() && getRows() == other.getRows();
         for (int x = 0; x < getCols(); x++)
             for (int y = 0; y < getRows(); ++y)
