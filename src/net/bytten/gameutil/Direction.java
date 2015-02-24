@@ -10,33 +10,28 @@ public enum Direction {
     
     ;
     
-    public static final Direction[] COMPASS_DIRECTIONS = new Direction[] {
-        N, E, S, W};
+    public static final Direction[] CARDINALS = new Direction[]{N, E, S, W},
+                                    CARDINALS_WITH_O = new Direction[]{N, E, S, W, O},
+                                    LEFT_RIGHT = new Direction[]{W, E},
+                                    LEFT_RIGHT_WITH_O = new Direction[]{W, E, O};
     
     public final int x, y;
+    private final Coords coords;
+    private final Vector2d vector;
     
     Direction(int x, int y) {
         this.x = x;
         this.y = y;
+        this.coords = new Coords(x,y);
+        this.vector = new Vector2d(x,y);
     }
     
-    private static Vector2d nVec = new Vector2d(0, -1),
-        eVec = new Vector2d(1, 0),
-        sVec = new Vector2d(0, 1),
-        wVec = new Vector2d(-1, 0),
-        oVec = new Vector2d(0, 0);
-    
     public Vector2d toVector2d() {
-        switch (this) {
-        case N: return nVec;
-        case E: return eVec;
-        case S: return sVec;
-        case W: return wVec;
-        case O: return oVec;
-        default:
-            assert false;
-            return null;
-        }
+        return vector;
+    }
+    
+    public Coords toCoords() {
+        return coords;
     }
     
     public Direction nextClockwise() {
