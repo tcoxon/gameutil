@@ -7,7 +7,7 @@ public class Matrix<T> implements Serializable, Iterable<T>, Collection<T> {
 
     private static final long serialVersionUID = 1L;
     
-    private ArrayList<ArrayList<T>> elements;
+    private ArrayList<T> elements;
     private int cols;
     private int rows;
     
@@ -18,43 +18,14 @@ public class Matrix<T> implements Serializable, Iterable<T>, Collection<T> {
     }
     
     private void init() {
-        elements = new ArrayList<ArrayList<T>>(cols);
-        for (int x = 0; x < cols; ++x) {
-            ArrayList<T> col = new ArrayList<T>(rows);
-            elements.add(col);
-            for (int y = 0; y < rows; ++y) {
-                col.add(null);
-            }
+        elements = new ArrayList<T>(cols * rows);
+        for (int i = 0; i < cols * rows; ++i) {
+            elements.add(null);
         }
-    }
-    
-    private static<S> void setLen(ArrayList<S> l, int len) {
-        assert len >= 0;
-        if (l.size() > len) {
-            while (l.size() > len) {
-                l.remove(len);
-            }
-        } else if (l.size() < len){
-            while (l.size() < len) {
-                l.add(null);
-            }
-        }
-    }
-    
-    public void setCols(int cols) {
-        setLen(elements, cols);
-        this.cols = cols;
-    }
-    
-    public void setRows(int rows) {
-        for (ArrayList<T> col: elements) {
-            setLen(col, rows);
-        }
-        this.rows = rows;
     }
     
     public void clear() {
-        init();
+        elements.clear();
     }
 
     public int getCols() {
@@ -65,8 +36,12 @@ public class Matrix<T> implements Serializable, Iterable<T>, Collection<T> {
         return rows;
     }
     
+    private int index(int x, int y) {
+        return y * cols + x;
+    }
+    
     public T get(int x, int y) {
-        return elements.get(x).get(y);
+        return elements.get(index(x,y));
     }
     
     public T getSafe(int x, int y) {
@@ -78,41 +53,14 @@ public class Matrix<T> implements Serializable, Iterable<T>, Collection<T> {
     }
     
     public void set(int x, int y, T v) {
-        elements.get(x).set(y, v);
+        elements.set(index(x,y), v);
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
-
-            int x = 0, y = 0;
-            
-            @Override
-            public boolean hasNext() {
-                return y < getRows();
-            }
-
-            @Override
-            public T next() {
-                T result = get(x,y);
-                ++x;
-                if (x >= getCols()) {
-                    x = 0;
-                    ++y;
-                }
-                return result;
-            }
-
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException();
-            }
-            
-        };
+        return elements.iterator();
     }
 
-    // XXX Many of these methods are untested and probably won't work!
-    
     @Override
     public boolean add(T arg0) {
         throw new UnsupportedOperationException();
@@ -125,25 +73,17 @@ public class Matrix<T> implements Serializable, Iterable<T>, Collection<T> {
 
     @Override
     public boolean contains(Object arg0) {
-        for (int x = 0; x < getCols(); ++x)
-            for (int y = 0; y < getRows(); ++y) {
-                if (get(x,y).equals(arg0))
-                    return true;
-            }
-        return false;
+        return elements.contains(arg0);
     }
 
     @Override
     public boolean containsAll(Collection<?> arg0) {
-        for (Object o: arg0) {
-            if (!contains(o)) return false;
-        }
-        return true;
+        return elements.containsAll(arg0);
     }
 
     @Override
     public boolean isEmpty() {
-        return getCols() != 0 && getRows() != 0;
+        return elements.isEmpty();
     }
 
     @Override
@@ -168,19 +108,12 @@ public class Matrix<T> implements Serializable, Iterable<T>, Collection<T> {
 
     @Override
     public Object[] toArray() {
-        return toArray(new Object[0]);
+        return elements.toArray();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public <T1> T1[] toArray(T1[] arg0) {
-        Object[] result = new Object[size()];
-        int i = 0;
-        for (int x = 0; x < getCols(); ++x)
-            for (int y = 0; y < getRows(); ++x) {
-                result[i++] = get(x,y);
-            }
-        return (T1[]) result;
+        return elements.toArray(arg0);
     }
     
 }
