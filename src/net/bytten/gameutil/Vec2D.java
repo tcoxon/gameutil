@@ -103,4 +103,9 @@ public class Vec2D implements Serializable {
     public Vec2I floor() {
         return new Vec2I((int)Math.floor(x), (int)Math.floor(y));
     }
+    
+    public Vec2I ceil() {
+        return new Vec2I((int)Math.ceil(x), (int)Math.ceil(y));
+    }
+    
 }

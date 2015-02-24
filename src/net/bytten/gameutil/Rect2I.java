@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Rect2I implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     public final int x, y, w, h;
 
@@ -47,12 +49,21 @@ public class Rect2I implements Serializable {
     }
     
     public Vec2I topLeft() {
-        return getOffset();
+        return new Vec2I(x,y);
+    }
+    // Note that these are *exclusive*
+    public Vec2I topRight() {
+        return new Vec2I(right(), top());
+    }
+    public Vec2I bottomLeft() {
+        return new Vec2I(left(), bottom());
+    }
+    public Vec2I bottomRight() {
+        return topLeft().add(size());
     }
     
-    // Note that this is *exclusive*
-    public Vec2I bottomRight() {
-        return getOffset().add(getSize());
+    public Vec2D midPoint() {
+        return new Vec2D(x + w/2.0, y + h/2.0);
     }
     
     public boolean contains(int x, int y) {
@@ -63,12 +74,33 @@ public class Rect2I implements Serializable {
         return contains(pos.x, pos.y);
     }
     
-    public Vec2I getOffset() {
-        return new Vec2I(x,y);
+    public Vec2I min() {
+        return topLeft();
     }
     
-    public Vec2I getSize() {
+    public Vec2I max() {
+        return bottomRight();
+    }
+    
+    public Vec2I size() {
         return new Vec2I(w,h);
+    }
+    
+    public Vec2D halfSize() {
+        return new Vec2D(w/2.0, h/2.0);
+    }
+    
+    public boolean overlaps(Rect2I other) {
+        Vec2D mid = midPoint(),
+            omid = other.midPoint();
+        Vec2D half = halfSize(),
+            ohalf = other.halfSize();
+        return Math.abs(mid.x - omid.x) < half.x + ohalf.x &&
+            Math.abs(mid.y - omid.y) < half.y + ohalf.y;
+    }
+    
+    public Rect2D toRect2D() {
+        return new Rect2D(x, y, w, h);
     }
     
     public static Rect2I boundingBox(Set<Vec2I> xyset) {
@@ -83,6 +115,30 @@ public class Rect2I implements Serializable {
         }
         assert minx <= maxx && miny <= maxy;
         return new Rect2I(minx, miny, maxx-minx+1, maxy-miny+1);
+    }
+
+    
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Rect2I) {
+            Rect2I or = (Rect2I)other;
+            return x == or.x && y == or.y && w == or.w && h == or.h;
+        }
+        return super.equals(other);
+    }
+
+    @Override
+    public String toString() {
+        return "Rect2I("+Integer.toString(x)+", "+Integer.toString(y)+", "+
+                Integer.toString(w)+", "+Integer.toString(h)+")";
+    }
+    
+    public Rect2I scale(int m) {
+        return new Rect2I(x*m, y*m, w*m, h*m);
+    }
+    
+    public Rect2D scale(double m) {
+        return new Rect2D(x*m, y*m, w*m, h*m);
     }
 
 }

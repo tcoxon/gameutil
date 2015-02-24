@@ -3,6 +3,8 @@ package net.bytten.gameutil;
 import java.io.Serializable;
 
 public class Rect2D implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     public final double x, y, w, h;
     
@@ -11,6 +13,14 @@ public class Rect2D implements Serializable {
         this.y = y;
         this.w = w;
         this.h = h;
+    }
+    
+    public static Rect2D fromExtremes(double x, double y, double right, double bottom) {
+        return new Rect2D(x, y, right-x, bottom-y);
+    }
+    
+    public static Rect2D fromExtremes(Vec2D min, Vec2D max) {
+        return fromExtremes(min.x, min.y, max.x, max.y);
     }
     
     public double top() {
@@ -45,6 +55,22 @@ public class Rect2D implements Serializable {
         return new Vec2D(x + w/2, y + h/2);
     }
     
+    public boolean contains(double x, double y) {
+        return x >= this.x && x < this.x+w && y >= this.y && y < this.y+h;
+    }
+    
+    public boolean contains(Vec2D pos) {
+        return contains(pos.x, pos.y);
+    }
+    
+    public Vec2D min() {
+        return topLeft();
+    }
+    
+    public Vec2D max() {
+        return bottomRight();
+    }
+    
     public Vec2D size() {
         return new Vec2D(w,h);
     }
@@ -62,6 +88,18 @@ public class Rect2D implements Serializable {
             Math.abs(mid.y - omid.y) < half.y + ohalf.y;
     }
     
+    public Rect2I floor() {
+        return Rect2I.fromExtremes(min().floor(), max().floor());
+    }
+    
+    public Rect2I ceil() {
+        return Rect2I.fromExtremes(min().ceil(), max().ceil());
+    }
+    
+    public Rect2I integral() {
+        return Rect2I.fromExtremes(min().floor(), max().ceil());
+    }
+    
     @Override
     public boolean equals(Object other) {
         if (other instanceof Rect2D) {
@@ -73,7 +111,7 @@ public class Rect2D implements Serializable {
     
     @Override
     public String toString() {
-        return "Rect2d("+Double.toString(x)+", "+Double.toString(y)+", "+
+        return "Rect2D("+Double.toString(x)+", "+Double.toString(y)+", "+
             Double.toString(w)+", "+Double.toString(h)+")";
     }
 
@@ -88,8 +126,5 @@ public class Rect2D implements Serializable {
     public Rect2D translate(double dx, double dy) {
         return new Rect2D(x + dx, y + dy, w, h);
     }
-    
-    public boolean contains(Vec2D pos) {
-        return pos.x >= x && pos.y >= y && pos.x < x+w && pos.y < y+h;
-    }
+
 }
