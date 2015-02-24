@@ -1,6 +1,8 @@
 package net.bytten.gameutil;
 
-public class Rect2d {
+import java.io.Serializable;
+
+public class Rect2d implements Serializable {
     
     public final double x, y, w, h;
     
@@ -27,34 +29,34 @@ public class Rect2d {
         return y+h;
     }
     
-    public Vector2d topLeft() {
-        return new Vector2d(left(), top());
+    public Vec2D topLeft() {
+        return new Vec2D(left(), top());
     }
-    public Vector2d topRight() {
-        return new Vector2d(right(), top());
+    public Vec2D topRight() {
+        return new Vec2D(right(), top());
     }
-    public Vector2d bottomLeft() {
-        return new Vector2d(left(), bottom());
+    public Vec2D bottomLeft() {
+        return new Vec2D(left(), bottom());
     }
-    public Vector2d bottomRight() {
-        return new Vector2d(right(), bottom());
+    public Vec2D bottomRight() {
+        return new Vec2D(right(), bottom());
     }
-    public Vector2d midPoint() {
-        return new Vector2d(x + w/2, y + h/2);
-    }
-    
-    public Vector2d size() {
-        return new Vector2d(w,h);
+    public Vec2D midPoint() {
+        return new Vec2D(x + w/2, y + h/2);
     }
     
-    public Vector2d halfSize() {
-        return new Vector2d(w/2, h/2);
+    public Vec2D size() {
+        return new Vec2D(w,h);
+    }
+    
+    public Vec2D halfSize() {
+        return new Vec2D(w/2, h/2);
     }
     
     public boolean overlaps(Rect2d other) {
-        Vector2d mid = midPoint(),
+        Vec2D mid = midPoint(),
             omid = other.midPoint();
-        Vector2d half = halfSize(),
+        Vec2D half = halfSize(),
             ohalf = other.halfSize();
         return Math.abs(mid.x - omid.x) < half.x + ohalf.x &&
             Math.abs(mid.y - omid.y) < half.y + ohalf.y;
@@ -79,7 +81,7 @@ public class Rect2d {
         return new Rect2d(x*m, y*m, w*m, h*m);
     }
     
-    public Rect2d translate(Vector2d other) {
+    public Rect2d translate(Vec2D other) {
         return translate(other.x, other.y);
     }
     
@@ -87,7 +89,7 @@ public class Rect2d {
         return new Rect2d(x + dx, y + dy, w, h);
     }
     
-    public boolean contains(Vector2d pos) {
+    public boolean contains(Vec2D pos) {
         return pos.x >= x && pos.y >= y && pos.x < x+w && pos.y < y+h;
     }
 }

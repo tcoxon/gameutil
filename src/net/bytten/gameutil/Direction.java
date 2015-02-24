@@ -17,17 +17,17 @@ public enum Direction {
     
     public final int x, y;
     private final Coords coords;
-    private final Vector2d vector;
+    private final Vec2D vec2D;
     
     Direction(int x, int y) {
         this.x = x;
         this.y = y;
         this.coords = new Coords(x,y);
-        this.vector = new Vector2d(x,y);
+        this.vec2D = new Vec2D(x,y);
     }
     
-    public Vector2d toVector2d() {
-        return vector;
+    public Vec2D toVec2D() {
+        return vec2D;
     }
     
     public Coords toCoords() {

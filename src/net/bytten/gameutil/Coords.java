@@ -45,23 +45,23 @@ public class Coords implements Comparable<Coords>, Serializable {
     }
     
     public double magnitude() {
-        return toVector2d().magnitude();
+        return toVec2D().magnitude();
     }
     
-    public Vector2d unit() {
-        return toVector2d().unit();
+    public Vec2D unit() {
+        return toVec2D().unit();
     }
     
     public Direction nearestCardinalDirection() {
-        return toVector2d().nearestCardinalDirection();
+        return toVec2D().nearestCardinalDirection();
     }
     
     public double squareDistanceTo(Coords other) {
-        return toVector2d().squareDistanceTo(other.toVector2d());
+        return toVec2D().squareDistanceTo(other.toVec2D());
     }
     
     public double distanceTo(Coords other) {
-        return toVector2d().distanceTo(other.toVector2d());
+        return toVec2D().distanceTo(other.toVec2D());
     }
     
     @Override
@@ -121,8 +121,8 @@ public class Coords implements Comparable<Coords>, Serializable {
         return Math.sqrt(dx*dx + dy*dy);
     }
     
-    public Vector2d toVector2d() {
-        return new Vector2d(this);
+    public Vec2D toVec2D() {
+        return new Vec2D(this);
     }
     
     public String toString() {

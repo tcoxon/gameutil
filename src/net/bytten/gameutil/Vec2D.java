@@ -2,48 +2,48 @@ package net.bytten.gameutil;
 
 import java.io.*;
 
-public class Vector2d implements Serializable {
+public class Vec2D implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
     public final double x, y;
     
-    public Vector2d(double x, double y) {
+    public Vec2D(double x, double y) {
         this.x = x;
         this.y = y;
     }
     
-    public Vector2d(Coords xy) {
+    public Vec2D(Coords xy) {
         this(xy.x, xy.y);
     }
 
-    public Vector2d add(Direction d) {
+    public Vec2D add(Direction d) {
         return add(d.x, d.y);
     }
     
-    public Vector2d add(Vector2d other) {
+    public Vec2D add(Vec2D other) {
         return add(other.x, other.y);
     }
     
-    public Vector2d add(double dx, double dy) {
-        return new Vector2d(x + dx, y + dy);
+    public Vec2D add(double dx, double dy) {
+        return new Vec2D(x + dx, y + dy);
     }
     
-    public Vector2d subtract(Vector2d other) {
-        return new Vector2d(x - other.x, y - other.y);
+    public Vec2D subtract(Vec2D other) {
+        return new Vec2D(x - other.x, y - other.y);
     }
     
-    public Vector2d multiply(double m) {
-        return new Vector2d(x * m, y * m);
+    public Vec2D multiply(double m) {
+        return new Vec2D(x * m, y * m);
     }
     
     public double magnitude() {
         return Math.sqrt(x*x + y*y);
     }
     
-    public Vector2d unit() {
+    public Vec2D unit() {
         double mag = magnitude();
-        return new Vector2d(x/mag, y/mag);
+        return new Vec2D(x/mag, y/mag);
     }
     
     public Direction nearestCardinalDirection() {
@@ -72,20 +72,20 @@ public class Vector2d implements Serializable {
         }
     }
     
-    public double squareDistanceTo(Vector2d other) {
+    public double squareDistanceTo(Vec2D other) {
         double dx = x - other.x,
             dy = y - other.y;
         return dx*dx + dy*dy;
     }
     
-    public double distanceTo(Vector2d other) {
+    public double distanceTo(Vec2D other) {
         return Math.sqrt(squareDistanceTo(other));
     }
     
     @Override
     public boolean equals(Object other) {
-        if (other instanceof Vector2d) {
-            Vector2d ov = (Vector2d)other;
+        if (other instanceof Vec2D) {
+            Vec2D ov = (Vec2D)other;
             return x == ov.x && y == ov.y;
         }
         return super.equals(other);
@@ -93,10 +93,10 @@ public class Vector2d implements Serializable {
     
     @Override
     public String toString() {
-        return "Vector2d("+Double.toString(x)+", "+Double.toString(y)+")";
+        return "Vec2D("+Double.toString(x)+", "+Double.toString(y)+")";
     }
 
-    public double dot(Vector2d v) {
+    public double dot(Vec2D v) {
         return x*v.x + y*v.y;
     }
     

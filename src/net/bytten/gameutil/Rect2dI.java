@@ -1,8 +1,9 @@
 package net.bytten.gameutil;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Rect2dI {
+public class Rect2dI implements Serializable {
     
     public final int x, y, w, h;
 
