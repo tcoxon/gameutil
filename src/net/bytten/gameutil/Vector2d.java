@@ -79,7 +79,7 @@ public class Vector2d implements Serializable {
     
     @Override
     public boolean equals(Object other) {
-        if (other instanceof Vector2d && !(other instanceof Rect2d)) {
+        if (other instanceof Vector2d) {
             Vector2d ov = (Vector2d)other;
             return x == ov.x && y == ov.y;
         }

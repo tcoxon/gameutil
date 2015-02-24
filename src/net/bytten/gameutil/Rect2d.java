@@ -1,13 +1,12 @@
 package net.bytten.gameutil;
 
-public class Rect2d extends Vector2d {
-
-    private static final long serialVersionUID = 1L;
+public class Rect2d {
     
-    public final double w, h;
+    public final double x, y, w, h;
     
     public Rect2d(double x, double y, double w, double h) {
-        super(x, y);
+        this.x = x;
+        this.y = y;
         this.w = w;
         this.h = h;
     }
@@ -44,16 +43,6 @@ public class Rect2d extends Vector2d {
         return new Vector2d(x + w/2, y + h/2);
     }
     
-    @Override
-    public Rect2d add(Vector2d other) {
-        return add(other.x, other.y);
-    }
-    
-    @Override
-    public Rect2d add(double dx, double dy) {
-        return new Rect2d(x + dx, y + dy, w, h);
-    }
-    
     public Vector2d size() {
         return new Vector2d(w,h);
     }
@@ -62,7 +51,7 @@ public class Rect2d extends Vector2d {
         return new Vector2d(w/2, h/2);
     }
     
-    public boolean intersects(Rect2d other) {
+    public boolean overlaps(Rect2d other) {
         Vector2d mid = midPoint(),
             omid = other.midPoint();
         Vector2d half = halfSize(),
@@ -86,9 +75,16 @@ public class Rect2d extends Vector2d {
             Double.toString(w)+", "+Double.toString(h)+")";
     }
 
-    @Override
-    public Rect2d multiply(double m) {
+    public Rect2d scale(double m) {
         return new Rect2d(x*m, y*m, w*m, h*m);
+    }
+    
+    public Rect2d translate(Vector2d other) {
+        return translate(other.x, other.y);
+    }
+    
+    public Rect2d translate(double dx, double dy) {
+        return new Rect2d(x + dx, y + dy, w, h);
     }
     
     public boolean contains(Vector2d pos) {
