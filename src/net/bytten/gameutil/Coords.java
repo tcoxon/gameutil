@@ -1,7 +1,11 @@
 package net.bytten.gameutil;
 
-public class Coords implements Comparable<Coords> {
+import java.io.Serializable;
 
+public class Coords implements Comparable<Coords>, Serializable {
+    
+    private static final long serialVersionUID = 1L;
+    
     public final int x, y;
     
     /**
@@ -36,6 +40,30 @@ public class Coords implements Comparable<Coords> {
         return new Coords(x-other.x, y-other.y);
     }
     
+    public Coords multiply(int m) {
+        return new Coords(m*x, m*y);
+    }
+    
+    public double magnitude() {
+        return toVector2d().magnitude();
+    }
+    
+    public Vector2d unit() {
+        return toVector2d().unit();
+    }
+    
+    public Direction nearestCardinalDirection() {
+        return toVector2d().nearestCardinalDirection();
+    }
+    
+    public double squareDistanceTo(Coords other) {
+        return toVector2d().squareDistanceTo(other.toVector2d());
+    }
+    
+    public double distanceTo(Coords other) {
+        return toVector2d().distanceTo(other.toVector2d());
+    }
+    
     @Override
     public boolean equals(Object other) {
          if (other instanceof Coords) {
@@ -48,7 +76,6 @@ public class Coords implements Comparable<Coords> {
 
     @Override
     public int compareTo(Coords other) {
-        // For Dungeon's TreeMap
         int d = this.x - other.x;
         if (d == 0) {
             d = this.y - other.y;
@@ -73,7 +100,7 @@ public class Coords implements Comparable<Coords> {
      * 
      * @param other the other Coords
      * @return the direction the other Coords is in
-     * @throws RuntimeException if the direction to the other Coords cannot be
+     * @throws AssertionError if the direction to the other Coords cannot be
      *                          described with compass directions, e.g. if it's
      *                          diagonal
      */
@@ -94,7 +121,15 @@ public class Coords implements Comparable<Coords> {
         return Math.sqrt(dx*dx + dy*dy);
     }
     
+    public Vector2d toVector2d() {
+        return new Vector2d(this);
+    }
+    
     public String toString() {
         return x+","+y;
+    }
+    
+    public int dot(Coords other) {
+        return x * other.x + y * other.y;
     }
 }

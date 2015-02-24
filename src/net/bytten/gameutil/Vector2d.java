@@ -17,9 +17,14 @@ public class Vector2d implements Serializable {
         this(xy.x, xy.y);
     }
 
+    public Vector2d add(Direction d) {
+        return add(d.x, d.y);
+    }
+    
     public Vector2d add(Vector2d other) {
         return add(other.x, other.y);
     }
+    
     public Vector2d add(double dx, double dy) {
         return new Vector2d(x + dx, y + dy);
     }
@@ -36,12 +41,12 @@ public class Vector2d implements Serializable {
         return Math.sqrt(x*x + y*y);
     }
     
-    public Vector2d direction() {
+    public Vector2d unit() {
         double mag = magnitude();
         return new Vector2d(x/mag, y/mag);
     }
     
-    public Direction nearestCompassDirection() {
+    public Direction nearestCardinalDirection() {
         double absx = Math.abs(x),
                absy = Math.abs(y);
         if (absx > absy) {
