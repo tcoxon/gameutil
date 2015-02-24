@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import net.bytten.gameutil.Coords;
+import net.bytten.gameutil.Vec2I;
 
 
 /**
@@ -21,7 +21,7 @@ import net.bytten.gameutil.Coords;
 public class AStar<Id extends Comparable<Id>> {
     public static interface IClient<Id> {
         public Collection<Id> getNeighbors(Id roomId);
-        public Coords getCoords(Id roomId);
+        public Vec2I getVec2I(Id roomId);
     }
     
     protected class DistanceComparator implements Comparator<Id> {
@@ -73,18 +73,18 @@ public class AStar<Id extends Comparable<Id>> {
         return cameFrom.get(id);
     }
     
-    protected double heuristicDistance(Coords pos) {
+    protected double heuristicDistance(Vec2I pos) {
         // Manhattan distance heuristic
-        Coords toPos = client.getCoords(to);
+        Vec2I toPos = client.getVec2I(to);
         return Math.abs(toPos.x - pos.x) + Math.abs(toPos.y - pos.y);
     }
     
     protected double edgeCost(Id from, Id to) {
-        return client.getCoords(from).distance(client.getCoords(to));
+        return client.getVec2I(from).distance(client.getVec2I(to));
     }
     
     protected void updateFScore(Id id) {
-        fScore.put(id, gScore.get(id) + heuristicDistance(client.getCoords(id)));
+        fScore.put(id, gScore.get(id) + heuristicDistance(client.getVec2I(id)));
     }
     
     public List<Id> solve() {

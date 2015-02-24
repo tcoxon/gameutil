@@ -16,13 +16,13 @@ public enum Direction {
                                     LEFT_RIGHT_WITH_O = new Direction[]{W, E, O};
     
     public final int x, y;
-    private final Coords coords;
+    private final Vec2I coords;
     private final Vec2D vec2D;
     
     Direction(int x, int y) {
         this.x = x;
         this.y = y;
-        this.coords = new Coords(x,y);
+        this.coords = new Vec2I(x,y);
         this.vec2D = new Vec2D(x,y);
     }
     
@@ -30,7 +30,7 @@ public enum Direction {
         return vec2D;
     }
     
-    public Coords toCoords() {
+    public Vec2I toCoords() {
         return coords;
     }
     

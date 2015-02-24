@@ -18,11 +18,11 @@ public class Rect2dI implements Serializable {
         return new Rect2dI(x, y, right-x, bottom-y);
     }
     
-    public static Rect2dI fromExtremes(Coords min, Coords max) {
+    public static Rect2dI fromExtremes(Vec2I min, Vec2I max) {
         return fromExtremes(min.x, min.y, max.x, max.y);
     }
     
-    public static Rect2dI fromExtremesInclusive(Coords min, Coords max) {
+    public static Rect2dI fromExtremesInclusive(Vec2I min, Vec2I max) {
         return fromExtremes(min, max.add(1,1));
     }
     
@@ -46,12 +46,12 @@ public class Rect2dI implements Serializable {
         return x+w;
     }
     
-    public Coords topLeft() {
+    public Vec2I topLeft() {
         return getOffset();
     }
     
     // Note that this is *exclusive*
-    public Coords bottomRight() {
+    public Vec2I bottomRight() {
         return getOffset().add(getSize());
     }
     
@@ -59,23 +59,23 @@ public class Rect2dI implements Serializable {
         return x >= this.x && x < this.x+w && y >= this.y && y < this.y+h;
     }
     
-    public boolean contains(Coords pos) {
+    public boolean contains(Vec2I pos) {
         return contains(pos.x, pos.y);
     }
     
-    public Coords getOffset() {
-        return new Coords(x,y);
+    public Vec2I getOffset() {
+        return new Vec2I(x,y);
     }
     
-    public Coords getSize() {
-        return new Coords(w,h);
+    public Vec2I getSize() {
+        return new Vec2I(w,h);
     }
     
-    public static Rect2dI boundingBox(Set<Coords> xyset) {
+    public static Rect2dI boundingBox(Set<Vec2I> xyset) {
         if (xyset.size() == 0) return new Rect2dI(0,0,0,0);
         int minx = Integer.MAX_VALUE, miny = Integer.MAX_VALUE,
             maxx = Integer.MIN_VALUE, maxy = Integer.MIN_VALUE;
-        for (net.bytten.gameutil.Coords xy: xyset) {
+        for (net.bytten.gameutil.Vec2I xy: xyset) {
             if (xy.x < minx) minx = xy.x;
             if (xy.x > maxx) maxx = xy.x;
             if (xy.y < miny) miny = xy.y;

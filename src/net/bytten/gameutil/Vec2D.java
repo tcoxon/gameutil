@@ -13,7 +13,7 @@ public class Vec2D implements Serializable {
         this.y = y;
     }
     
-    public Vec2D(Coords xy) {
+    public Vec2D(Vec2I xy) {
         this(xy.x, xy.y);
     }
 
@@ -100,7 +100,7 @@ public class Vec2D implements Serializable {
         return x*v.x + y*v.y;
     }
     
-    public Coords floor() {
-        return new Coords((int)Math.floor(x), (int)Math.floor(y));
+    public Vec2I floor() {
+        return new Vec2I((int)Math.floor(x), (int)Math.floor(y));
     }
 }
