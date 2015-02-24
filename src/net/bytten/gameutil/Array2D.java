@@ -44,7 +44,7 @@ public class Array2D<T> implements Serializable, Iterable<T>, Collection<T> {
         return elements.get(index(x,y));
     }
     
-    public T getSafe(int x, int y) {
+    public T getClamped(int x, int y) {
         if (x < 0) x = 0;
         if (x >= getCols()) x = getCols()-1;
         if (y < 0) y = 0;
