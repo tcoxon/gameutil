@@ -209,10 +209,10 @@ public class StringUtil {
         return text;
     }
 
-    public static String join(String glue, List<String> pieces) {
+    public static String join(String glue, Collection<String> pieces) {
         return join(glue, pieces.toArray(new String[0]));
     }
-
+    
     public static String join(String glue, String... pieces) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < pieces.length; ++i) {
