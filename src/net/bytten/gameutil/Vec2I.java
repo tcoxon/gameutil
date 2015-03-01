@@ -1,6 +1,7 @@
 package net.bytten.gameutil;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Vec2I implements Comparable<Vec2I>, Serializable {
     
@@ -65,16 +66,6 @@ public class Vec2I implements Comparable<Vec2I>, Serializable {
     }
     
     @Override
-    public boolean equals(Object other) {
-         if (other instanceof Vec2I) {
-             Vec2I o = (Vec2I)other;
-             return this.x == o.x && this.y == o.y;
-         } else {
-             return super.equals(other);
-         }
-    }
-
-    @Override
     public int compareTo(Vec2I other) {
         int d = this.x - other.x;
         if (d == 0) {
@@ -124,12 +115,27 @@ public class Vec2I implements Comparable<Vec2I>, Serializable {
     public Vec2D toVec2D() {
         return new Vec2D(this);
     }
+
+    public int dot(Vec2I other) {
+        return x * other.x + y * other.y;
+    }
     
+    @Override
+    public boolean equals(Object other) {
+         if (other instanceof Vec2I) {
+             Vec2I o = (Vec2I)other;
+             return this.x == o.x && this.y == o.y;
+         } else {
+             return super.equals(other);
+         }
+    }
+
     public String toString() {
         return x+","+y;
     }
     
-    public int dot(Vec2I other) {
-        return x * other.x + y * other.y;
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(new Object[]{ x, y });
     }
 }

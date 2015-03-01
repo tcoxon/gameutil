@@ -133,6 +133,11 @@ public class Rect2I implements Serializable {
                 Integer.toString(w)+", "+Integer.toString(h)+")";
     }
     
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(new Object[]{ x, y, w, h });
+    }
+    
     public Rect2I scale(int m) {
         return new Rect2I(x*m, y*m, w*m, h*m);
     }

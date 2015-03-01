@@ -1,6 +1,7 @@
 package net.bytten.gameutil;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Vec2D implements Serializable {
 
@@ -82,6 +83,18 @@ public class Vec2D implements Serializable {
         return Math.sqrt(squareDistanceTo(other));
     }
     
+    public double dot(Vec2D v) {
+        return x*v.x + y*v.y;
+    }
+    
+    public Vec2I floor() {
+        return new Vec2I((int)Math.floor(x), (int)Math.floor(y));
+    }
+    
+    public Vec2I ceil() {
+        return new Vec2I((int)Math.ceil(x), (int)Math.ceil(y));
+    }
+    
     @Override
     public boolean equals(Object other) {
         if (other instanceof Vec2D) {
@@ -96,16 +109,9 @@ public class Vec2D implements Serializable {
         return "Vec2D("+Double.toString(x)+", "+Double.toString(y)+")";
     }
 
-    public double dot(Vec2D v) {
-        return x*v.x + y*v.y;
-    }
-    
-    public Vec2I floor() {
-        return new Vec2I((int)Math.floor(x), (int)Math.floor(y));
-    }
-    
-    public Vec2I ceil() {
-        return new Vec2I((int)Math.ceil(x), (int)Math.ceil(y));
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(new Object[]{ x, y });
     }
     
 }

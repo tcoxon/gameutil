@@ -12,6 +12,7 @@ public class Pair<T1, T2> {
         this.second = second;
     }
     
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (first == null) {
@@ -29,6 +30,7 @@ public class Pair<T1, T2> {
     }
     
     
+    @Override
     public boolean equals(Object other) {
         if (!(other instanceof Pair<?,?>)) {
             return super.equals(other);
@@ -38,6 +40,7 @@ public class Pair<T1, T2> {
             (second == o.second || (second != null && second.equals(o.second)));
     }
     
+    @Override
     public int hashCode() {
         return Arrays.hashCode(new Object[]{ first, second });
     }

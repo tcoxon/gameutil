@@ -1,6 +1,7 @@
 package net.bytten.gameutil;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Rect2D implements Serializable {
 
@@ -113,6 +114,11 @@ public class Rect2D implements Serializable {
     public String toString() {
         return "Rect2D("+Double.toString(x)+", "+Double.toString(y)+", "+
             Double.toString(w)+", "+Double.toString(h)+")";
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(new Object[]{ x, y, w, h });
     }
 
     public Rect2D scale(double m) {
