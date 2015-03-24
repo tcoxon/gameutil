@@ -17,6 +17,9 @@ public class RandUtil {
     }
 
     static public<T> T choice(Random rand, List<Pair<Double,T>> options) {
+        if (options.size() == 1)
+            return options.get(0).second;
+        
         double total = 0;
         for (Pair<Double,T> option: options) {
             total += option.first;
@@ -28,6 +31,10 @@ public class RandUtil {
                 return option.second;
         }
         return null;
+    }
+    
+    static public<T> T choice(Random rand, Selection<T> selection) {
+        return choice(rand, selection.getOptions());
     }
 
     static public Random deterministicObj(String id) {
