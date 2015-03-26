@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
 
+import javax.xml.bind.DatatypeConverter;
+
 public class StringUtil {
     
     public static String capitalize(String text) {
@@ -238,6 +240,43 @@ public class StringUtil {
         return value.replace("&", "&amp;").replace("<","&lt;")
                 .replace(">","&gt;").replace("\"","&quot;")
                 .replace("'", "&apos;");
+    }
+    
+    // Java 8 includes a Base64 class, but Java 7 does not :(
+    public static String encodeBase64(byte[] data) {
+        return DatatypeConverter.printBase64Binary(data);
+    }
+    
+    public static String encodeBase64FilenameSafe(byte[] data) {
+        return encodeBase64(data).replace("+","-").replace("/","_").replace("=",".");
+    }
+    
+    public static byte[] decodeBase64(String base64) {
+        return DatatypeConverter.parseBase64Binary(base64.replace("-","+").replace("_","/").replace(".","="));
+    }
+    
+    public static String decodeBase64AsString(String base64) {
+        try {
+            return new String(decodeBase64(base64), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public static String encodeBase64(String data) {
+        try {
+            return encodeBase64(data.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public static String encodeBase64FilenameSafe(String data) {
+        try {
+            return encodeBase64FilenameSafe(data.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
     
 }
