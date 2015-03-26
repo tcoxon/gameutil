@@ -234,4 +234,10 @@ public class StringUtil {
         }
     }
     
+    public static String xmlEscape(String value) {
+        return value.replace("&", "&amp;").replace("<","&lt;")
+                .replace(">","&gt;").replace("\"","&quot;")
+                .replace("'", "&apos;");
+    }
+    
 }
