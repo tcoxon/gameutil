@@ -35,5 +35,16 @@ public class Selection<T> {
     public List<Pair<Double,T>> getOptions() {
         return Collections.unmodifiableList(options);
     }
+    
+    public Selection<T> filtered(final Predicate<T> p) {
+        return new Selection<T>(CollectionUtil.filtered(getOptions(), new Predicate<Pair<Double,T>>() {
+            public boolean query(Pair<Double, T> value) {
+                return p.query(value.second);
+            }
+        }));
+    }
 
+    public int size() {
+        return options.size();
+    }
 }
