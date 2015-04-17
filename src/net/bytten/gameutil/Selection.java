@@ -43,6 +43,14 @@ public class Selection<T> {
             }
         }));
     }
+    
+    public<R> Selection<R> mapped(final UnaryFunction<R,T> f) {
+        return new Selection<R>(CollectionUtil.mapped(getOptions(), new UnaryFunction<Pair<Double,R>, Pair<Double,T>>() {
+            public Pair<Double, R> run(Pair<Double, T> value) {
+                return new Pair<Double, R>(value.first, f.run(value.second));
+            }
+        }));
+    }
 
     public int size() {
         return options.size();

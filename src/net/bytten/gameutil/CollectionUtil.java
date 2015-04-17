@@ -17,6 +17,14 @@ public class CollectionUtil {
         }
         return result;
     }
+    
+    public static<R,A> List<R> mapped(List<A> values, UnaryFunction<R,A> f) {
+        List<R> result = new ArrayList<R>();
+        for (A value: values) {
+            result.add(f.run(value));
+        }
+        return result;
+    }
 
     public static<T> T getOne(Collection<T> from) {
         return from.iterator().next();
