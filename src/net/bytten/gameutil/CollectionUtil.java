@@ -2,6 +2,7 @@ package net.bytten.gameutil;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,6 +52,12 @@ public class CollectionUtil {
     public static<T> Set<T> differenceHash(Set<T> a, Set<T> b) {
         Set<T> result = new HashSet<T>(a);
         result.removeAll(b);
+        return result;
+    }
+    
+    public static<T> List<T> reversed(List<T> list) {
+        List<T> result = new ArrayList<T>(list);
+        Collections.reverse(result);
         return result;
     }
     
