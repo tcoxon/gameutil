@@ -55,4 +55,8 @@ public class Selection<T> {
     public int size() {
         return options.size();
     }
+    
+    public String toString() {
+        return options.toString();
+    }
 }

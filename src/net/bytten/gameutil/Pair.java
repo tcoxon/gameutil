@@ -15,6 +15,7 @@ public class Pair<T1, T2> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append('(');
         if (first == null) {
             sb.append("null");
         } else {
@@ -26,6 +27,7 @@ public class Pair<T1, T2> {
         } else {
             sb.append(second.toString());
         }
+        sb.append(')');
         return sb.toString();
     }
     
