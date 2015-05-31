@@ -146,4 +146,8 @@ public class Rect2I implements Serializable {
         return new Rect2D(x*m, y*m, w*m, h*m);
     }
 
+    public Rect2I translate(int dx, int dy) {
+        return new Rect2I(x+dx, y+dy, w, h);
+    }
+
 }
