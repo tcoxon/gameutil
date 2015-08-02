@@ -150,4 +150,7 @@ public class Rect2I implements Serializable {
         return new Rect2I(x+dx, y+dy, w, h);
     }
 
+    public Rect2I grow(int gx, int gy) {
+        return new Rect2I(x-gx, y-gy, w+2*gx, h+2*gy);
+    }
 }

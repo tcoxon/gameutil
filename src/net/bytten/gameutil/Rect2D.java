@@ -1,9 +1,9 @@
 package net.bytten.gameutil;
 
-import java.io.Serializable;
-import java.util.Arrays;
+import java.io.*;
+import java.util.*;
 
-public class Rect2D implements Serializable {
+public class Rect2D implements Serializable, Collidable2D {
 
     private static final long serialVersionUID = 1L;
     
@@ -133,4 +133,31 @@ public class Rect2D implements Serializable {
         return new Rect2D(x + dx, y + dy, w, h);
     }
 
+    @Override
+    public List<Vec2D> vertices() {
+        return Arrays.asList(
+            new Vec2D(x, y),
+            new Vec2D(x+w, y),
+            new Vec2D(x+w, y+h),
+            new Vec2D(x, y+h));
+    }
+
+    @Override
+    public List<LineSegment> edges() {
+        return new Poly2D(vertices()).edges();
+    }
+
+    public static Rect2D boundBox(Collidable2D shape) {
+        double minX = Double.POSITIVE_INFINITY;
+        double maxX = Double.NEGATIVE_INFINITY;
+        double minY = Double.POSITIVE_INFINITY;
+        double maxY = Double.NEGATIVE_INFINITY;
+        for (Vec2D vertex: shape.vertices()) {
+            if (vertex.x < minX) minX = vertex.x;
+            if (vertex.x > maxX) maxX = vertex.x;
+            if (vertex.y < minY) minY = vertex.y;
+            if (vertex.y > maxY) maxY = vertex.y;
+        }
+        return Rect2D.fromExtremes(minX, minY, maxX, maxY);
+    }
 }

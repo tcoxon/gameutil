@@ -18,6 +18,10 @@ public class Vec2D implements Serializable {
         this(xy.x, xy.y);
     }
 
+    public boolean isZero() {
+        return x == 0 && y == 0;
+    }
+
     public Vec2D add(Direction d) {
         return add(d.x, d.y);
     }
@@ -45,6 +49,10 @@ public class Vec2D implements Serializable {
     public Vec2D unit() {
         double mag = magnitude();
         return new Vec2D(x/mag, y/mag);
+    }
+
+    public Vec2D normal() {
+        return new Vec2D(y, -x);
     }
     
     public Direction nearestCardinalDirection() {

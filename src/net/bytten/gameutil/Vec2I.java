@@ -20,6 +20,10 @@ public class Vec2I implements Comparable<Vec2I>, Serializable {
         this.y = y;
     }
     
+    public boolean isZero() {
+        return x == 0 && y == 0;
+    }
+
     /**
      * Gets the coordinates of the next space in the given direction
      * 
