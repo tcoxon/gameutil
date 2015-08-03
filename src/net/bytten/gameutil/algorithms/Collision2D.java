@@ -36,7 +36,7 @@ public class Collision2D {
 
     private static Double optOverlap(Vec2D a, Vec2D b) {
         // Compute length that two 1-D line segments overlap by
-        if (a.x <= b.x) {
+        if (a.x < b.x) {
             if (a.y > b.x) {
                 return a.y - b.x;
             }

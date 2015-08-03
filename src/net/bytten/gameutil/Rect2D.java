@@ -147,6 +147,11 @@ public class Rect2D implements Serializable, Collidable2D {
         return new Poly2D(vertices()).edges();
     }
 
+    @Override
+    public Vec2D center() {
+        return new Vec2D(x+w/2.0, y+h/2.0);
+    }
+
     public static Rect2D boundBox(Collidable2D shape) {
         double minX = Double.POSITIVE_INFINITY;
         double maxX = Double.NEGATIVE_INFINITY;

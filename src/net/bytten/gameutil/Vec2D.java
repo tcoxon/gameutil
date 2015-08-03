@@ -103,6 +103,10 @@ public class Vec2D implements Serializable {
         return new Vec2I((int)Math.ceil(x), (int)Math.ceil(y));
     }
     
+    public Vec2I round() {
+        return new Vec2I((int)Math.round(x), (int)Math.round(y));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other instanceof Vec2D) {

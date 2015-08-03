@@ -49,4 +49,13 @@ public class Poly2D implements Serializable, Collidable2D {
             }
         }));
     }
+
+    @Override
+    public String toString() {
+        String str = "Poly2D[";
+        for (Vec2D vertex: vertices)
+            str += vertex.toString()+", ";
+        str += "]";
+        return str;
+    }
 }
