@@ -152,17 +152,28 @@ public class Rect2D implements Serializable, Collidable2D {
         return new Vec2D(x+w/2.0, y+h/2.0);
     }
 
-    public static Rect2D boundBox(Collidable2D shape) {
+    public static Rect2D boundBox(List<Vec2D> vertices) {
         double minX = Double.POSITIVE_INFINITY;
         double maxX = Double.NEGATIVE_INFINITY;
         double minY = Double.POSITIVE_INFINITY;
         double maxY = Double.NEGATIVE_INFINITY;
-        for (Vec2D vertex: shape.vertices()) {
+        for (Vec2D vertex: vertices) {
             if (vertex.x < minX) minX = vertex.x;
             if (vertex.x > maxX) maxX = vertex.x;
             if (vertex.y < minY) minY = vertex.y;
             if (vertex.y > maxY) maxY = vertex.y;
         }
         return Rect2D.fromExtremes(minX, minY, maxX, maxY);
+    }
+
+    public static Rect2D boundBox(Collidable2D shape) {
+        return boundBox(shape.vertices());
+    }
+
+    public static Rect2D boundBoxShapes(List<Collidable2D> shapes) {
+        List<Vec2D> vertices = new ArrayList<Vec2D>();
+        for (Collidable2D shape: shapes)
+            vertices.addAll(shape.vertices());
+        return boundBox(vertices);
     }
 }
