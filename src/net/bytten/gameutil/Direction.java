@@ -13,7 +13,9 @@ public enum Direction {
     public static final Direction[] CARDINALS = new Direction[]{N, E, S, W},
                                     CARDINALS_WITH_O = new Direction[]{N, E, S, W, O},
                                     LEFT_RIGHT = new Direction[]{W, E},
-                                    LEFT_RIGHT_WITH_O = new Direction[]{W, E, O};
+                                    LEFT_RIGHT_WITH_O = new Direction[]{W, E, O},
+                                    UP_DOWN = new Direction[]{N, S},
+                                    UP_DOWN_WITH_O = new Direction[]{N, S, O};
     
     public final int x, y;
     private final Vec2I coords;
