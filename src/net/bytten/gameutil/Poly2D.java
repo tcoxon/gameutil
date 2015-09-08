@@ -18,6 +18,10 @@ public class Poly2D implements Serializable, Collidable2D {
         this.center = total.multiply(1.0/vertices.size());
     }
 
+    public Poly2D(Vec2D... vertices) {
+        this(Arrays.asList(vertices));
+    }
+
     @Override
     public List<LineSegment> edges() {
         List<LineSegment> result = new ArrayList<LineSegment>();
@@ -46,6 +50,14 @@ public class Poly2D implements Serializable, Collidable2D {
         return new Poly2D(CollectionUtil.mapped(vertices, new UnaryFunction<Vec2D, Vec2D>() {
             public Vec2D run(Vec2D arg) {
                 return arg.add(v);
+            }
+        }));
+    }
+
+    public Poly2D scale(final double m) {
+        return new Poly2D(CollectionUtil.mapped(vertices, new UnaryFunction<Vec2D, Vec2D>() {
+            public Vec2D run(Vec2D arg) {
+                return arg.multiply(m);
             }
         }));
     }
