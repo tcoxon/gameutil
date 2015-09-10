@@ -167,6 +167,7 @@ public class Rect2D implements Serializable, Collidable2D {
     }
 
     public static Rect2D boundBox(Collidable2D shape) {
+        if (shape instanceof Rect2D) return (Rect2D)shape;
         return boundBox(shape.vertices());
     }
 
