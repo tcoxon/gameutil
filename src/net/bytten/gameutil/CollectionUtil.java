@@ -1,12 +1,6 @@
 package net.bytten.gameutil;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class CollectionUtil {
 
@@ -61,4 +55,15 @@ public class CollectionUtil {
         return result;
     }
     
+    public static<T extends Comparable<? super T>> List<T> sorted(Collection<T> values) {
+        List<T> result = new ArrayList<T>(values);
+        Collections.sort(result);
+        return result;
+    }
+
+    public static<T> List<T> sorted(Collection<T> values, Comparator<T> cmp) {
+        List<T> result = new ArrayList<T>(values);
+        Collections.sort(result, cmp);
+        return result;
+    }
 }
