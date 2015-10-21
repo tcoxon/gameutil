@@ -118,4 +118,24 @@ public class Matrix3D {
         return translate2D(delta.x, delta.y);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Matrix3D)) return false;
+        return Arrays.equals(elements, ((Matrix3D)other).elements);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(elements) ^ 720357230;
+    }
+
+    @Override
+    public String toString() {
+        Object[] args = new Object[elements.length];
+        for (int i = 0; i < elements.length; ++i) {
+            args[i] = elements[i];
+        }
+        return String.format("Matrix3D(%s, %s, %s, %s, %s, %s, %s, %s, %s)", args);
+    }
+
 }
