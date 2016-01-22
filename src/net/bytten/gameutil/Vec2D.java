@@ -94,6 +94,10 @@ public class Vec2D implements Serializable {
     public double dot(Vec2D v) {
         return x*v.x + y*v.y;
     }
+
+    public double angleTo(Vec2D v) {
+        return Math.acos(this.dot(v) / (this.magnitude() * v.magnitude()));
+    }
     
     public Vec2I floor() {
         return new Vec2I((int)Math.floor(x), (int)Math.floor(y));
