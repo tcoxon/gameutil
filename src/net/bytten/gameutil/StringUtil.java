@@ -57,6 +57,14 @@ public class StringUtil {
     }
     
     public static List<String> wrapWords(String text, int cols) {
+        return wrapWords(text, cols, new UnaryFunction<Integer, String>() {
+            public Integer run(String word) {
+                return word.length();
+            }
+        });
+    }
+
+    public static List<String> wrapWords(String text, int cols, UnaryFunction<Integer, String> textWidthFn) {
         // Wrap a string at a specified number of columns into a list of lines,
         // while trying to preserve whole words
         List<String> words = splitWords(text),
@@ -69,13 +77,13 @@ public class StringUtil {
                 // New line
                 lines.add(current);
                 current = "";
-            } else if (current.length() + word.length() <= cols) {
+            } else if (textWidthFn.run(current) + textWidthFn.run(word) <= cols) {
                 // word fits on the line
                 current += word;
-            } else if (current.length() < cols-1 && word.length() > cols) {
+            } else if (textWidthFn.run(current) < cols-1 && textWidthFn.run(word) > cols) {
                 // word doesn't fit on the line, and won't fit on the next
                 // either, so break it up
-                int spaceLeft = cols - current.length();
+                int spaceLeft = cols - textWidthFn.run(current);
                 current += word.substring(0, spaceLeft-1);
                 current += "-";
                 
@@ -87,7 +95,7 @@ public class StringUtil {
                 if (word.charAt(0) == '\n' || word.charAt(0) == ' ')
                     word = word.substring(1);
                 
-                if (word.length() > cols) {
+                if (textWidthFn.run(word) > cols) {
                     // word won't fit on the new line, so break it up
                     current = word.substring(0, cols-1);
                     current += "-";
