@@ -95,17 +95,7 @@ public class StringUtil {
                 if (word.charAt(0) == '\n' || word.charAt(0) == ' ')
                     word = word.substring(1);
                 
-                if (textWidthFn.run(word) > cols) {
-                    // word won't fit on the new line, so break it up
-                    current = word.substring(0, cols-1);
-                    current += "-";
-                    
-                    words.set(i, word.substring(cols-1));
-                    --i;
-                    
-                } else {
-                    current = word;
-                }
+                current = word;
             }
         }
         if (!"".equals(current))
