@@ -153,4 +153,12 @@ public class Rect2I implements Serializable {
     public Rect2I grow(int gx, int gy) {
         return new Rect2I(x-gx, y-gy, w+2*gx, h+2*gy);
     }
+
+    public Rect2I union(Rect2I other) {
+        return Rect2I.fromExtremes(
+            Math.min(x, other.x),
+            Math.min(y, other.y),
+            Math.max(right(), other.right()),
+            Math.max(bottom(), other.bottom()));
+    }
 }
