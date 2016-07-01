@@ -111,11 +111,8 @@ public class FileUtil {
     }
 
     public static String readText(File f) throws IOException {
-        FileInputStream in = new FileInputStream(f);
-        try {
+        try (FileInputStream in = new FileInputStream(f)) {
             return readText(in);
-        } finally {
-            in.close();
         }
     }
     
@@ -124,11 +121,8 @@ public class FileUtil {
     }
 
     public static String[] readLines(File f) throws IOException {
-        FileInputStream in = new FileInputStream(f);
-        try {
+        try (FileInputStream in = new FileInputStream(f)) {
             return readLines(in);
-        } finally {
-            in.close();
         }
     }
 
@@ -148,11 +142,8 @@ public class FileUtil {
     }
 
     public static void writeText(File f, String data) throws IOException {
-        FileOutputStream os = new FileOutputStream(f);
-        try {
+        try (FileOutputStream os = new FileOutputStream(f)) {
             writeText(os, data);
-        } finally {
-            os.close();
         }
     }
 
@@ -172,11 +163,8 @@ public class FileUtil {
     }
 
     public static void unzip(String dirTo, String zipFrom) throws IOException {
-        FileInputStream fis = new FileInputStream(zipFrom);
-        try {
+        try (FileInputStream fis = new FileInputStream(zipFrom)) {
             unzip(dirTo, fis);
-        } finally {
-            fis.close();
         }
     }
 
@@ -191,10 +179,9 @@ public class FileUtil {
                         throw new IOException("Failed to create directory "+dest.getAbsolutePath());
                     }
                 } else {
-                    BufferedOutputStream bos = new BufferedOutputStream(
-                            new FileOutputStream(dest));
-                    cat(zis, bos);
-                    bos.close();
+                    try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(dest))) {
+                        cat(zis, bos);
+                    }
                 }
                 zis.closeEntry();
             }
@@ -213,21 +200,16 @@ public class FileUtil {
     }
 
     public static void zip(String zipTo, String dirFrom) throws IOException {
-        FileOutputStream fos = new FileOutputStream(zipTo);
-        ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(fos));
-        File dir = new File(dirFrom);
-        try {
+        try (ZipOutputStream zos = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(zipTo)))) {
+            File dir = new File(dirFrom);
             for (File f: dir.listFiles()) {
                 ZipEntry entry = new ZipEntry(f.getName());
                 zos.putNextEntry(entry);
-                BufferedInputStream bis = new BufferedInputStream(
-                        new FileInputStream(f));
-                cat(bis, zos);
-                bis.close();
+                try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(f))) {
+                    cat(bis, zos);
+                }
                 zos.closeEntry();
             }
-        } finally {
-            zos.close();
         }
     }
 
