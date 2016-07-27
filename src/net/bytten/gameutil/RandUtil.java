@@ -55,4 +55,9 @@ public class RandUtil {
         return new Random(r.nextLong());
     }
     
+    public static<T> List<T> shuffled(Random rand, Collection<T> values) {
+        List<T> result = new ArrayList<T>(values);
+        Collections.shuffle(result, rand);
+        return result;
+    }
 }
