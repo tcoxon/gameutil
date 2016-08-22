@@ -65,6 +65,10 @@ public class Rect2I implements Serializable {
     public Vec2D midPoint() {
         return new Vec2D(x + w/2.0, y + h/2.0);
     }
+
+    public Vec2D center() {
+        return midPoint();
+    }
     
     public boolean contains(int x, int y) {
         return x >= this.x && x < this.x+w && y >= this.y && y < this.y+h;
