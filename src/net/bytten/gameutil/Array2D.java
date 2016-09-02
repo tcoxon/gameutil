@@ -56,6 +56,12 @@ public class Array2D<T> implements Serializable, Iterable<T>, Collection<T> {
         elements.set(index(x,y), v);
     }
 
+    public void fill(T value) {
+        for (int x = 0; x < cols; ++x)
+        for (int y = 0; y < rows; ++y)
+            set(x, y, value);
+    }
+
     @Override
     public Iterator<T> iterator() {
         return elements.iterator();
