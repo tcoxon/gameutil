@@ -43,6 +43,10 @@ public class Array2D<T> implements Serializable, Iterable<T>, Collection<T> {
     public T get(int x, int y) {
         return elements.get(index(x,y));
     }
+
+    public T get(Vec2I pos) {
+        return get(pos.x, pos.y);
+    }
     
     public T getClamped(int x, int y) {
         if (x < 0) x = 0;
@@ -52,8 +56,16 @@ public class Array2D<T> implements Serializable, Iterable<T>, Collection<T> {
         return get(x,y);
     }
     
+    public T getClamped(Vec2I pos) {
+        return getClamped(pos.x, pos.y);
+    }
+    
     public void set(int x, int y, T v) {
         elements.set(index(x,y), v);
+    }
+
+    public void set(Vec2I pos, T v) {
+        set(pos.x, pos.y, v);
     }
 
     public void fill(T value) {
