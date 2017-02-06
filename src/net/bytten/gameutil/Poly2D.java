@@ -15,7 +15,10 @@ public class Poly2D implements Serializable, Collidable2D {
         for (Vec2D vertex: vertices) {
             total = total.add(vertex);
         }
-        this.center = total.multiply(1.0/vertices.size());
+        if (vertices.size() == 0)
+            this.center = total;
+        else
+            this.center = total.multiply(1.0/vertices.size());
     }
 
     public Poly2D(Vec2D... vertices) {
