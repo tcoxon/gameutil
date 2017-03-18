@@ -37,16 +37,16 @@ public class RandUtil {
         return choice(rand, selection.getOptions());
     }
 
-    static public Random deterministicObj(String id) {
-        Random r = new Random(id.hashCode());
+    static public Random deterministicObj(Object seed) {
+        Random r = new Random(seed.hashCode());
         r.nextBoolean(); // Generally, the second result is better ¯\_(ツ)_/¯
         return r;
     }
     
-    static public double deterministic(String id) {
+    static public double deterministic(Object seed) {
         // Used to return a deterministic double from 0.0 to 1.0 for a
         // GameObject with the given ID.
-        return deterministicObj(id).nextDouble();
+        return deterministicObj(seed).nextDouble();
     }
     
     static public Random sub(Random r) {
