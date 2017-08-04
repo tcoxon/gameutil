@@ -89,6 +89,18 @@ public class Rect2D implements Serializable, Collidable2D {
             Math.abs(mid.y - omid.y) < half.y + ohalf.y;
     }
     
+    public Rect2D intersect(Rect2D other) {
+        double left = Math.max(x, other.x);
+        double top = Math.max(y, other.y);
+        double right = Math.min(right(), other.right());
+        double bottom = Math.min(bottom(), other.bottom());
+        return new Rect2D(left, top, right - left, bottom - top);
+    }
+    
+    public double area() {
+        return w * h;
+    }
+    
     public Rect2I floor() {
         return Rect2I.fromExtremes(min().floor(), max().floor());
     }
