@@ -11,7 +11,7 @@ public class Vec2I implements Comparable<Vec2I>, Serializable {
     
     /**
      * Create coordinates at the given X and Y position.
-     * 
+     *
      * @param x the position along the left-right dimension
      * @param y the position along the top-bottom dimension
      */
@@ -20,13 +20,21 @@ public class Vec2I implements Comparable<Vec2I>, Serializable {
         this.y = y;
     }
     
+    public int x() {
+        return x;
+    }
+    
+    public int y() {
+        return y;
+    }
+    
     public boolean isZero() {
         return x == 0 && y == 0;
     }
 
     /**
      * Gets the coordinates of the next space in the given direction
-     * 
+     *
      * @param d the direction
      */
     public Vec2I add(Direction d) {
@@ -80,7 +88,7 @@ public class Vec2I implements Comparable<Vec2I>, Serializable {
     
     /**
      * Determines whether this Vec2I and another Vec2I are next to each other.
-     * 
+     *
      * @param other the other Vec2I
      * @return whether they are adjacent
      */
@@ -92,7 +100,7 @@ public class Vec2I implements Comparable<Vec2I>, Serializable {
 
     /**
      * Gets the direction from this Vec2I to another Vec2I.
-     * 
+     *
      * @param other the other Vec2I
      * @return the direction the other Vec2I is in
      * @throws AssertionError if the direction to the other Vec2I cannot be
