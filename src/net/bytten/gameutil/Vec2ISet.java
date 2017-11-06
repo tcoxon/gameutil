@@ -8,7 +8,7 @@ public class Vec2ISet extends LinkedHashSet<Vec2I> {
     }
     
     public Vec2ISet(Collection<? extends Vec2I> c) {
-        super(c);
+        super(ensureOrderedCollection(c));
     }
 
     public boolean contains(int x, int y) {
@@ -30,4 +30,10 @@ public class Vec2ISet extends LinkedHashSet<Vec2I> {
         throw new NoSuchElementException();
     }
     
+    private static<T extends Vec2I> Collection<T> ensureOrderedCollection(Collection<T> c) {
+        if (c instanceof SortedSet || c instanceof LinkedHashSet)
+            return c;
+        // No guaranteed order - so sort the collection:
+        return new TreeSet<T>(c);
+    }
 }
