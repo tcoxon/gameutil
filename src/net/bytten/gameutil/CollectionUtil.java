@@ -37,6 +37,12 @@ public class CollectionUtil {
         return result;
     }
 
+    public static Vec2ISet intersectionVec2I(Set<Vec2I> a, Set<Vec2I> b) {
+        Vec2ISet result = new Vec2ISet(a);
+        result.retainAll(b);
+        return result;
+    }
+
     public static<T extends Comparable<T>> Set<T> differenceTree(Set<T> a, Set<T> b) {
         Set<T> result = new TreeSet<T>(a);
         result.removeAll(b);
@@ -45,6 +51,12 @@ public class CollectionUtil {
 
     public static<T> Set<T> differenceHash(Set<T> a, Set<T> b) {
         Set<T> result = new HashSet<T>(a);
+        result.removeAll(b);
+        return result;
+    }
+    
+    public static Vec2ISet differenceVec2I(Set<Vec2I> a, Set<Vec2I> b) {
+        Vec2ISet result = new Vec2ISet(a);
         result.removeAll(b);
         return result;
     }

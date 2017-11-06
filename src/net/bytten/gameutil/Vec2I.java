@@ -148,6 +148,6 @@ public class Vec2I implements Comparable<Vec2I>, Serializable {
     
     @Override
     public int hashCode() {
-        return Arrays.hashCode(new Object[]{ x, y });
+        return 0xb5fb2872 ^ x ^ (y << 16);
     }
 }
