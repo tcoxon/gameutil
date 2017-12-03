@@ -3,6 +3,12 @@ package net.bytten.gameutil;
 import java.util.*;
 
 public class CollectionUtil {
+    
+    public static<T> List<T> singleton(T value) {
+        List<T> list = new ArrayList<T>();
+        list.add(value);
+        return list;
+    }
 
     public static<T> List<T> filtered(List<T> values, Predicate<T> p) {
         List<T> result = new ArrayList<T>();
