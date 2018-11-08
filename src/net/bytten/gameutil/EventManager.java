@@ -35,7 +35,7 @@ public class EventManager<Listener, Args> {
     }
 
     public void fire(Invoker<Listener, Args> invoker, Args args) {
-        for (Listener l : listeners) {
+        for (Listener l : new ArrayList<Listener>(listeners)) {
             invoker.invoke(l, args);
         }
     }
