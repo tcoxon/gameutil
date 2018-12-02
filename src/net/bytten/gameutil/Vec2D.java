@@ -42,6 +42,14 @@ public class Vec2D implements Serializable {
         return new Vec2D(x * m, y * m);
     }
     
+    public Vec2D piecewiseMultiply(Vec2D other) {
+        return new Vec2D(x * other.x, y * other.y);
+    }
+    
+    public Vec2D piecewiseDivide(Vec2D other) {
+        return new Vec2D(x / other.x, y / other.y);
+    }
+    
     public double magnitude() {
         return Math.sqrt(x*x + y*y);
     }
