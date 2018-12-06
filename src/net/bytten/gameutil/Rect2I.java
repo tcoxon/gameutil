@@ -150,6 +150,10 @@ public class Rect2I implements Serializable {
         return new Rect2D(x*m, y*m, w*m, h*m);
     }
 
+    public Rect2D scale(double mx, double my) {
+        return new Rect2D(x*mx, y*mx, w*my, h*my);
+    }
+
     public Rect2I translate(int dx, int dy) {
         return new Rect2I(x+dx, y+dy, w, h);
     }
@@ -165,4 +169,13 @@ public class Rect2I implements Serializable {
             Math.max(right(), other.right()),
             Math.max(bottom(), other.bottom()));
     }
+    
+    public Rect2I intersect(Rect2I other) {
+        int left = Math.max(x, other.x);
+        int top = Math.max(y, other.y);
+        int right = Math.min(right(), other.right());
+        int bottom = Math.min(bottom(), other.bottom());
+        return new Rect2I(left, top, right - left, bottom - top);
+    }
+    
 }

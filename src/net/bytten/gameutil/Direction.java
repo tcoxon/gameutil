@@ -28,6 +28,14 @@ public enum Direction {
         this.vec2D = new Vec2D(x,y);
     }
     
+    public static Direction valueOf(int x, int y) {
+        if (x > 0 && y == 0) return E;
+        if (x < 0 && y == 0) return W;
+        if (x == 0 && y > 0) return S;
+        if (x == 0 && y < 0) return N;
+        return O;
+    }
+    
     public Vec2D toVec2D() {
         return vec2D;
     }
