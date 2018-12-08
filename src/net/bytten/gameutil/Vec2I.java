@@ -7,6 +7,7 @@ public class Vec2I implements Comparable<Vec2I>, Serializable {
     
     private static final long serialVersionUID = 1L;
     
+    public static final Vec2I ZERO = new Vec2I(0,0);
     public final int x, y;
     
     /**

@@ -7,6 +7,7 @@ public class Vec2D implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
+    public static final Vec2D ZERO = new Vec2D(0, 0);
     public final double x, y;
     
     public Vec2D(double x, double y) {
