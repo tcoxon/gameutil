@@ -137,6 +137,10 @@ public class Rect2D implements Serializable, Collidable2D {
         return new Rect2D(x*m, y*m, w*m, h*m);
     }
     
+    public Rect2D piecewiseScale(Vec2D m) {
+        return new Rect2D(x * m.x, y * m.y, w * m.x ,h * m.y);
+    }
+    
     public Rect2D translate(Vec2D other) {
         return translate(other.x, other.y);
     }

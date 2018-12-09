@@ -58,6 +58,10 @@ public class Vec2I implements Comparable<Vec2I>, Serializable {
         return new Vec2I(m*x, m*y);
     }
     
+    public Vec2I piecewiseMultiply(Vec2I other) {
+        return new Vec2I(x * other.x, y * other.y);
+    }
+    
     public double magnitude() {
         return toVec2D().magnitude();
     }
